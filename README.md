@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Antd_project
 
-## Available Scripts
+> 这是一个基于 create-react-app 的多页 antd 项目框架
 
-In the project directory, you can run:
+## 项目结构
 
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
+├── LICENSE
+├── README.md
+├── config                           # webpavk配置文件夹
+│   ├── env.js
+│   ├── jest
+│   │   ├── cssTransform.js
+│   │   └── fileTransform.js
+│   ├── paths.js                     # 一些路径常量
+│   ├── webpack.config.dev.js        # 开发模式webpack配置
+│   ├── webpack.config.prod.js       # 生产模式webpack配置
+│   └── webpackDevServer.config.js   # 热加载配置
+├── package.json
+├── prettier.config.js               # prettier配置文件
+├── public                           # 公共资源
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+├── scripts                          # scripts 脚本文件目录
+│   ├── build.js                     # 构建
+│   ├── new.js                       # 新建 page/component 目录
+│   ├── start.js                     # 开发
+│   └── test.js                      # 测试
+├── src
+│   ├── components                   # 公用组件
+│   ├── http                         # 封装请求
+│   │   ├── axios.js                 # 配置 axios 全局拦截器
+│   │   ├── config.js                # 公用配置文件
+│   │   ├── example                  # 已页面为单位的 api 声明目录
+│   │   │   └── example.js
+│   │   └── index.js                 # 导出所有 api
+│   ├── index.js
+│   ├── pages                        # 页面目录
+│   │   └── index                    # index 页面
+│   │       ├── App.js               # 配置 React-router
+│   │       ├── index.js             # 入口文件
+│   │       ├── index.scss
+│   │       ├── serviceWorker.js
+│   │       └── veiws                # 页面下视图目录(由react-router路由)
+│   │          └── index
+│   │              ├── index.js
+│   │              └── index.scss
+│   ├── setuProxy.js                 # 开发模式代理文件
+│   ├── style                        # 全局scss目录
+│   │   ├── global.scss              # 全局
+│   │   ├── mixins.scss              # mixin
+│   │   └── variable.scss            # sass变量
+│   └── utils                        # 工具文件
+│       ├── index.js                 # 入口/导出
+│       └── template                 # new scripts 的模板文件
+│           ├── component
+│           │   ├── hello.jsx
+│           │   └── hello.scss
+│           └── page
+│               ├── App.js
+│               ├── index.js
+│               ├── index.scss
+│               ├── serviceWorker.js
+│               └── veiws
+│                   └── newView
+│                       ├── index.js
+│                       └── index.scss
+└── yarn.lock
+```
