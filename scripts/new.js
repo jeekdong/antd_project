@@ -72,7 +72,6 @@ inquirer.prompt(promptList).then(answers => {
                 console.log('初始化页面文件成功！')
                 console.log('正在读取模板文件')
                 readTemp(tempComponentPath, genNewComponent, answers)
-                console.log(fileObj)
                 writeFile(fileObj, 'components')
             } else {
                 console.log('该模板已存在')
