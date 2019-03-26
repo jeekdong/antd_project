@@ -7,7 +7,7 @@
 ```
 ├── LICENSE
 ├── README.md
-├── config                           # webpavk配置文件夹
+├── config                           # webpack配置文件夹
 │   ├── env.js
 │   ├── jest
 │   │   ├── cssTransform.js
