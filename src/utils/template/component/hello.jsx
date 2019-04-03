@@ -1,18 +1,20 @@
-import React, { Component } from 'react'
-import { Button } from 'antd'
-import './$name.scss'
+import React, { Component } from 'react';
+import { Button } from 'antd';
+<% if(this.needCss) { %>
+import './<%= this.name %>.scss';
+<% } %>
 
-class $Name extends Component {
-    state = {}
+class <%= this.Name %> extends Component {
+    state = {};
 
     render() {
         return (
-            <div className="$name">
-                <h1>A Component $name</h1>
+            <div className="<%= this.name %>">
+                <h1>A Component <%= this.name %></h1>
                 <Button>example</Button>
             </div>
         )
     }
 }
 
-export default $Name
+export default <%= this.Name %>

@@ -1,3 +1,4 @@
+const TemplateEngine = require('./templateParse')
 const fs = require('fs')
 const inquirer = require('inquirer')
 const path = require('path')
@@ -61,6 +62,7 @@ const promptList = [
 ]
 
 inquirer.prompt(promptList).then(answers => {
+    answers.Name = answers.name.slice(0, 1).toLocaleUpperCase() + answers.name.slice(1)
     if (answers.type === 'page') {
         exists(answers.name, 'page').then(res => {
             if (res) {
@@ -137,17 +139,17 @@ function genNewComponent(filePath, answers) {
     if (!answers.needCss && filePath.includes('scss')) {
         return
     }
-    let text = fs.readFileSync(filePath).toString()
-    if (!answers.needCss) {
-        text = text.replace(/import '\.\/\$name.scss'/g, '')
-    }
-    let upperName = answers.name.slice(0, 1).toLocaleUpperCase() + answers.name.slice(1)
-    text = text.replace(/\$Name/g, upperName).replace(/\$name/g, answers.name)
+    // let text = fs.readFileSync(filePath).toString()
+    // if (!answers.needCss) {
+    //     text = text.replace(/import '\.\/\$name.scss'/g, '')
+    // }
+    // text = text.replace(/\$Name/g, upperName).replace(/\$name/g, answers.name)
     let newPath = filePath
         .slice(filePath.indexOf('/component') + 1) // +1去除路径开头的'/'，生成相对路径
-        .replace(/component/g, upperName)
+        .replace(/component/g, answers.Name)
         .replace(/hello/g, answers.name)
-    fileObj[newPath] = text
+    let text = fs.readFileSync(filePath).toString()
+    fileObj[newPath] = TemplateEngine(text, answers)
 }
 
 function writeFile(fileObj, type) {
