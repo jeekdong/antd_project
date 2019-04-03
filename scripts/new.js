@@ -62,8 +62,8 @@ const promptList = [
 ]
 
 inquirer.prompt(promptList).then(answers => {
-    answers.Name = answers.name.slice(0, 1).toLocaleUpperCase() + answers.name.slice(1)
     if (answers.type === 'page') {
+        answers.View = answers.view.slice(0, 1).toLocaleUpperCase() + answers.view.slice(1)
         exists(answers.name, 'page').then(res => {
             if (res) {
                 console.log('初始化页面文件成功！')
@@ -76,6 +76,7 @@ inquirer.prompt(promptList).then(answers => {
             }
         })
     } else if (answers.type === 'component') {
+        answers.Name = answers.name.slice(0, 1).toLocaleUpperCase() + answers.name.slice(1)
         exists(answers.name, 'component').then(res => {
             if (res) {
                 console.log('初始化页面文件成功！')
@@ -122,16 +123,12 @@ function readTemp(tempPath, callback, answers) {
 }
 
 function genNewPage(filePath, answers) {
-    let text = fs.readFileSync(filePath).toString()
-    text = text
-        .replace(/\$View/g, answers.view.slice(0, 1).toLocaleUpperCase() + answers.view.slice(1))
-        .replace(/\$view/g, answers.view)
-        .replace(/\$title/g, answers.title)
     let newPath = filePath
         .slice(filePath.indexOf('/page') + 1) // +1去除路径开头的'/'，生成相对路径
         .replace(/page/g, answers.name)
         .replace(/newView/g, answers.view)
-    fileObj[newPath] = text
+    let text = fs.readFileSync(filePath).toString()
+    fileObj[newPath] = filePath.includes('serviceWorker') ? text : TemplateEngine(text, answers)
 }
 
 function genNewComponent(filePath, answers) {
@@ -139,11 +136,6 @@ function genNewComponent(filePath, answers) {
     if (!answers.needCss && filePath.includes('scss')) {
         return
     }
-    // let text = fs.readFileSync(filePath).toString()
-    // if (!answers.needCss) {
-    //     text = text.replace(/import '\.\/\$name.scss'/g, '')
-    // }
-    // text = text.replace(/\$Name/g, upperName).replace(/\$name/g, answers.name)
     let newPath = filePath
         .slice(filePath.indexOf('/component') + 1) // +1去除路径开头的'/'，生成相对路径
         .replace(/component/g, answers.Name)

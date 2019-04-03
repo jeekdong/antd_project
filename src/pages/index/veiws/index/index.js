@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'antd'
-import './index.scss'
+import Hello from '@src/components/Hello/hello'
 
 class Index extends Component {
     state = {}
@@ -10,6 +10,7 @@ class Index extends Component {
             <div className="App index">
                 <h1>A new page</h1>
                 <Button>example</Button>
+                <Hello />
             </div>
         )
     }
