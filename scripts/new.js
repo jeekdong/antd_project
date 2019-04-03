@@ -7,7 +7,6 @@ const tempPagePath = path.resolve(__dirname, '../src/utils/template/page')
 const tempComponentPath = path.resolve(__dirname, '../src/utils/template/component')
 
 let fileObj = {}
-// 初始化默认修改header菜单文件
 
 const promptList = [
     {
@@ -47,6 +46,14 @@ const promptList = [
         type: 'input',
         message: '请输入模板名称(文件名)',
         name: 'name',
+        when(answers) {
+            return answers.type === 'component'
+        }
+    },
+    {
+        type: 'confirm',
+        message: '是否需要css文件',
+        name: 'needCss',
         when(answers) {
             return answers.type === 'component'
         }
@@ -126,7 +133,14 @@ function genNewPage(filePath, answers) {
 }
 
 function genNewComponent(filePath, answers) {
+    // 是否生成css
+    if (!answers.needCss && filePath.includes('scss')) {
+        return
+    }
     let text = fs.readFileSync(filePath).toString()
+    if (!answers.needCss) {
+        text = text.replace(/import '\.\/\$name.scss'/g, '')
+    }
     let upperName = answers.name.slice(0, 1).toLocaleUpperCase() + answers.name.slice(1)
     text = text.replace(/\$Name/g, upperName).replace(/\$name/g, answers.name)
     let newPath = filePath
